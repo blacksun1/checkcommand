@@ -1,0 +1,43 @@
+{
+  "name": "checkcommand",
+  "version": "1.0.0",
+  "description": "Check that a command exists",
+  "main": "build/checkcommand.js",
+  "homepage": "https://github.com/jviotti/checkcommand",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jviotti/checkcommand.git"
+  },
+  "keywords": [
+    "checkcommand",
+    "check",
+    "command",
+    "install"
+  ],
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "prepublish": "gulp build"
+  },
+  "author": "Juan Cruz Viotti <juanchiviotti@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "chai-as-promised": "^5.1.0",
+    "coffee-script": "~1.8.0",
+    "gulp": "~3.8.10",
+    "gulp-coffee": "~2.2.0",
+    "gulp-coffeelint": "~0.4.0",
+    "gulp-mocha": "~2.0.0",
+    "gulp-util": "~3.0.1",
+    "mocha": "~2.0.1",
+    "sinon": "^1.15.3",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.30",
+    "command-exists": "^0.1.0"
+  }
+}
