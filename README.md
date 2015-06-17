@@ -61,6 +61,41 @@ checkcommand.ensure 'wget', message, (error) ->
 		console.log('It seems that wget is installed!')
 ```
 
+### checkcommand.ensureMultiple(Object commands[, Function callback])
+
+Ensure multiple commands. A utility function to prevent calling `checkcommand.ensure()` multiple times.
+
+The `commands` object contains command names as property keys, and error messages as values.
+
+Example:
+
+```coffee
+checkcommand = require('checkcommand')
+
+checkcommand.ensureMultiple
+	'wget': 'Missing wget'
+	'curl': 'Missing curl'
+.then ->
+	console.log('It seems that wget and curl are installed!')
+.catch (error) ->
+	console.error(error)
+```
+
+***
+
+```coffee
+checkcommand = require('checkcommand')
+
+checkcommand.ensureMultiple
+	'wget': 'Missing wget'
+	'curl': 'Missing curl'
+, (error) ->
+	if error?
+		console.error(error.message)
+	else
+		console.log('It seems that wget and curl are installed!')
+```
+
 Tests
 -----
 
