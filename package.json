@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "bluebird": "^2.9.30",
-    "command-exists": "^0.1.0"
+    "command-exists": "^0.1.0",
+    "lodash": "^3.9.3"
   }
 }
