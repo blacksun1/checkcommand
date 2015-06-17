@@ -1,3 +1,5 @@
+_ = require('lodash')
+Promise = require('bluebird')
 utils = require('./utils')
 
 ###*
@@ -19,3 +21,23 @@ exports.ensure = (command, message, callback) ->
 	utils.exists(command).then (exists) ->
 		throw new Error(message) if not exists
 	.nodeify(callback)
+
+###*
+# @summary Ensure multiple commands at the same time.
+# @function
+# @public
+#
+# @param {Object} commands - commands
+# @returns {Promise}
+#
+# @example
+# checkcommand.ensureMultiple
+#		'wget': 'Missing wget'
+#		'curl': 'Missing curl'
+#		'axel': 'Missing axel'
+###
+exports.ensureMultiple = (commands, callback) ->
+	ensurePromises = _.map _.pairs(commands), (command) ->
+		return exports.ensure(_.first(command), _.last(command))
+
+	Promise.all(ensurePromises).nodeify(callback)

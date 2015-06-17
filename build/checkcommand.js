@@ -1,4 +1,8 @@
-var utils;
+var Promise, utils, _;
+
+_ = require('lodash');
+
+Promise = require('bluebird');
 
 utils = require('./utils');
 
@@ -25,4 +29,28 @@ exports.ensure = function(command, message, callback) {
       throw new Error(message);
     }
   }).nodeify(callback);
+};
+
+
+/**
+ * @summary Ensure multiple commands at the same time.
+ * @function
+ * @public
+ *
+ * @param {Object} commands - commands
+ * @returns {Promise}
+ *
+ * @example
+ * checkcommand.ensureMultiple
+ *		'wget': 'Missing wget'
+ *		'curl': 'Missing curl'
+ *		'axel': 'Missing axel'
+ */
+
+exports.ensureMultiple = function(commands, callback) {
+  var ensurePromises;
+  ensurePromises = _.map(_.pairs(commands), function(command) {
+    return exports.ensure(_.first(command), _.last(command));
+  });
+  return Promise.all(ensurePromises).nodeify(callback);
 };
